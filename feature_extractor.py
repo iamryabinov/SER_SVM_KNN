@@ -13,7 +13,8 @@ class FeatureExtractor:
         output_file_name = instance_name + '.csv'
         config_options = ' -C ' + self.config_path
         input_options = ' -I ' + self.input_folder + input_file_name
-        output_options = ' -lldcsvoutput ' + self.output_folder + output_file_name
+        # output_options = ' -csvoutput ' + self.output_folder + output_file_name
+        output_options = ' -csvoutput ' + self.output_folder + 'features.csv'
         instance_options = ' -instname ' + instance_name
         misc = ''
         opensmile_call = self.exe_path + config_options + input_options + output_options + instance_options + misc
@@ -27,3 +28,4 @@ class FeatureExtractor:
             opensmile_call = self.construct_call(input_file_name)
             os.system(opensmile_call)
             print(f'Extracted from {input_file_name} successfully')
+
