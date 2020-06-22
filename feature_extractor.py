@@ -10,10 +10,8 @@ class FeatureExtractor:
 
     def construct_call(self, input_file_name):
         instance_name = input_file_name.split('.')[0]
-        output_file_name = instance_name + '.csv'
         config_options = ' -C ' + self.config_path
         input_options = ' -I ' + self.input_folder + input_file_name
-        # output_options = ' -csvoutput ' + self.output_folder + output_file_name
         output_options = ' -csvoutput ' + self.output_folder + 'features.csv'
         instance_options = ' -instname ' + instance_name
         misc = ''
