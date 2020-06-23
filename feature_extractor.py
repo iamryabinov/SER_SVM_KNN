@@ -1,5 +1,5 @@
 import os
-
+import pandas as pd
 
 class FeatureExtractor:
     def __init__(self, input_folder, exe_path, config_path, output_folder):
@@ -14,7 +14,7 @@ class FeatureExtractor:
         input_options = ' -I ' + self.input_folder + input_file_name
         output_options = ' -csvoutput ' + self.output_folder + 'features.csv'
         instance_options = ' -instname ' + instance_name
-        misc = ''
+        misc = ' -loglevel 1 -nologfile'
         opensmile_call = self.exe_path + config_options + input_options + output_options + instance_options + misc
         return opensmile_call
 
@@ -26,4 +26,8 @@ class FeatureExtractor:
             opensmile_call = self.construct_call(input_file_name)
             os.system(opensmile_call)
             print(f'Extracted from {input_file_name} successfully')
-
+        features = pd.read_csv(self.output_folder + 'features.csv', delimiter=';')
+        features['label'] = ''
+        cols = list(features.columns.values)
+        features = features[cols[0:1] + [cols[-1]] + cols[1:-1]]
+        features.to_csv(self.output_folder + 'features_with_labels.csv', index=False, sep=';')
