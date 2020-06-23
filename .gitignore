@@ -5,4 +5,4 @@
 
 /__pycache__
 /tools/**/
-/.ipynb_checkpoints/
+/**/.ipynb_checkpoints/
