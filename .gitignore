@@ -1,7 +1,7 @@
 /.idea/
 /datasets/**/*.mp4
 /datasets/**/*.wav
-
+/bkp/
 
 /__pycache__
 /tools/**/

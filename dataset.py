@@ -1,4 +1,3 @@
-import pandas as pd
 from feature_extractor import *
 from constants import *
 
