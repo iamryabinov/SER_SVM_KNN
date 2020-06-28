@@ -1,4 +1,5 @@
 from dataset import *
+from sklearn.preprocessing import StandardScaler, Normalizer  
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 import numpy as np
@@ -40,6 +41,20 @@ def knn_multi_classification(datasets_list):
         print('Job done!')
 
 
+
+def standardize(datasets_list):
+    for dataset in datasets_list:
+            dataset.name = dataset.name + '_standardized'
+            dataset.features.X = StandardScaler().fit_transform(dataset.features.X)
+            print('Standardization complete!')
+
+def normalize(datasets_list):
+    for dataset in datasets_list:
+            dataset.name = dataset.name + '_normalized'
+            dataset.features.X = Normalizer().fit_transform(dataset.features.X)
+            print('Normalization complete!')
+
+
 if __name__ == '__main__':
     emodb = Dataset('Emo-DB', EMODB_FOLDER, 'German')
     iemo = Dataset('Iemocap', IEMOCAP_FOLDER, 'English')
@@ -48,4 +63,5 @@ if __name__ == '__main__':
     savee = Dataset('SAVEE', SAVEE_FOLDER, 'English')
     tess = Dataset('TESS', TESS_FOLDER, 'English')
     datasets_list = [emodb, iemo, ravdess, cremad, savee, tess]
+    normalize(datasets_list)
     knn_multi_classification(datasets_list)
