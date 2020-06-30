@@ -24,3 +24,20 @@ class FeatureFile:
         X = df.drop(['name', 'label', 'frameTime'], axis=1).values
         y = df[['label']].values
         return(X, y)
+
+def create_english_dataset():
+    iemo = Dataset('Iemocap', IEMOCAP_FOLDER, 'English')
+    ravdess = Dataset('Ravdess', RAVDESS_FOLDER, 'English')
+    cremad = Dataset('Crema-D', CREMAD_FOLDER, 'English')
+    savee = Dataset('SAVEE', SAVEE_FOLDER, 'English')
+    tess = Dataset('TESS', TESS_FOLDER, 'English')
+    datasets = [iemo, ravdess, cremad, savee, tess]
+    big_dataset_features_list = []
+    for dataset in datasets:
+        big_dataset_features_list.append(dataset.features.contents)
+    all_english = pd.concat(big_dataset_features_list, ignore_index=True)
+    all_english.to_csv('datasets\\all_english\\features_with_labels.csv', index=False, sep=';')
+    print('Done')
+
+if __name__ == '__main__':
+    create_english_dataset()

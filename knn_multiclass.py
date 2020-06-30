@@ -2,6 +2,8 @@ from dataset import *
 from sklearn.preprocessing import StandardScaler, Normalizer  
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import plot_confusion_matrix 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
@@ -54,14 +56,23 @@ def normalize(datasets_list):
             dataset.features.X = Normalizer().fit_transform(dataset.features.X)
             print('Normalization complete!')
 
+def knn_confusion_matrix(dataset, n):
+    dataset.features.X = StandardScaler().fit_transform(dataset.features.X)
+    X = dataset.features.X
+    y = dataset.features.y.ravel()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=15, stratify=y)
+    knn = KNeighborsClassifier(n_neighbors=n)
+    knn.fit(X_train, y_train)
+    disp = plot_confusion_matrix(
+        knn, X_test, y_test, 
+        normalize='true', xticks_rotation=45, cmap=plt.cm.Oranges,
+        )
+    disp.ax_.set_title('{} k-NN confusion matrix'.format(dataset.name))
+    plt.show()
+       
+
 
 if __name__ == '__main__':
-    emodb = Dataset('Emo-DB', EMODB_FOLDER, 'German')
-    iemo = Dataset('Iemocap', IEMOCAP_FOLDER, 'English')
-    ravdess = Dataset('Ravdess', RAVDESS_FOLDER, 'English')
-    cremad = Dataset('Crema-D', CREMAD_FOLDER, 'English')
-    savee = Dataset('SAVEE', SAVEE_FOLDER, 'English')
-    tess = Dataset('TESS', TESS_FOLDER, 'English')
-    datasets_list = [emodb, iemo, ravdess, cremad, savee, tess]
-    normalize(datasets_list)
-    knn_multi_classification(datasets_list)
+    all_eng_six = Dataset('English assembly', 'datasets\\all_english\\six_discrete\\', 'English')
+    standardize([all_eng_six])
+    knn_multi_classification([all_eng_six])
