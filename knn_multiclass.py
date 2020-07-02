@@ -57,6 +57,9 @@ def normalize(datasets_list):
             print('Normalization complete!')
 
 def knn_confusion_matrix(dataset, n):
+    directory = 'plots\\knn\\confusion_matrix\\'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
     dataset.features.X = StandardScaler().fit_transform(dataset.features.X)
     X = dataset.features.X
     y = dataset.features.y.ravel()
@@ -65,14 +68,17 @@ def knn_confusion_matrix(dataset, n):
     knn.fit(X_train, y_train)
     disp = plot_confusion_matrix(
         knn, X_test, y_test, 
-        normalize='true', xticks_rotation=45, cmap=plt.cm.Oranges,
+        normalize='true', xticks_rotation=30, cmap=plt.cm.Oranges,
         )
     disp.ax_.set_title('{} k-NN confusion matrix'.format(dataset.name))
-    plt.show()
+    filename = directory + '{}_knn_confusion_matrix.png'.format(dataset.name)
+    plt.savefig(fname=filename)
+    print('Saved {}'.format(filename))
+    plt.close()
        
 
 
 if __name__ == '__main__':
-    all_eng_six = Dataset('English assembly', 'datasets\\all_english\\six_discrete\\', 'English')
-    standardize([all_eng_six])
-    knn_multi_classification([all_eng_six])
+    knn_multi_classification([all_english_six])
+    standardize([all_english_six])
+    knn_multi_classification([all_english_six])

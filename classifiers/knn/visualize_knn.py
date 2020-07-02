@@ -6,8 +6,8 @@ import os
 def visualize_train_test():
     csv_files = []
     for file in os.listdir():
-        if file.endswith('raw.csv'):
-            #  if file.endswith('standardized.csv'):
+         if file.endswith('raw.csv'):
+        #  if 'standardized.csv' in file and 'assembly' in file:
             #  if file.endswith('normalized.csv'):
             csv_files.append(file)
     for csv_file in csv_files:
@@ -52,7 +52,7 @@ def visualize_raw_vs_standard(names_list):
                     _ = df.iloc[df['test_score'].argmax()].values.tolist()
                     max_test_score_n = _[0]
                     max_test_score = _[2]
-                if 'standardized' not in file and 'normalized' not in file:
+                if 'raw' in file:
                     df = pd.read_csv(file, sep=';')
                     test_score_raw = df['test_score'].values.tolist()
         plt.figure(figsize=[12.8, 10.24])
@@ -76,6 +76,5 @@ def visualize_raw_vs_standard(names_list):
 
 
 if __name__ == '__main__':
-    names_list = ['crema-d', 'emo-db', 'iemocap', 'ravdess', 'savee', 'tess']
-    #  visualize_raw_vs_standard(names_list)
-    visualize_train_test()
+    visualize_raw_vs_standard(['english-assembly'])
+    #  visualize_train_test()
