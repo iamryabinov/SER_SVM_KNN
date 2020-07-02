@@ -79,6 +79,5 @@ def knn_confusion_matrix(dataset, n):
 
 
 if __name__ == '__main__':
-    knn_multi_classification([all_english_six])
-    standardize([all_english_six])
+    normalize([all_english_six])
     knn_multi_classification([all_english_six])

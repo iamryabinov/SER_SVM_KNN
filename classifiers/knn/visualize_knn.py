@@ -40,7 +40,7 @@ def visualize_train_test():
         print('Saved {} plot successfully!'.format(dataset_name))
 
 
-def visualize_raw_vs_standard(names_list):
+def visualize_raw_vs_norm_standard(names_list):
     for name in names_list:
         print(name)
         for file in os.listdir():
@@ -55,6 +55,9 @@ def visualize_raw_vs_standard(names_list):
                 if 'raw' in file:
                     df = pd.read_csv(file, sep=';')
                     test_score_raw = df['test_score'].values.tolist()
+                if 'normalized' in file:
+                    df = pd.read_csv(file, sep=';')
+                    test_score_normalized = df['test_score'].values.tolist()
         plt.figure(figsize=[12.8, 10.24])
         plt.scatter(max_test_score_n, max_test_score,
                     label='Max test score {:.3f} with {:.0f} neighbors'.format(max_test_score, max_test_score_n),
@@ -63,18 +66,20 @@ def visualize_raw_vs_standard(names_list):
                  label='Raw features', linewidth=7.0)
         plt.plot(n_neighbors, test_score_standardized,
                  label='Standardized features', linewidth=7.0)
+        plt.plot(n_neighbors, test_score_normalized,
+                 label='Normalized features', linewidth=7.0)
         plt.xticks(fontsize=16)
         plt.yticks(fontsize=16)
         plt.xscale('linear')
         plt.xlabel('Number of neighbors', fontsize=30)
         plt.ylabel('Model accuracy', fontsize=30)
-        plt.title('{} k-NN multiclass classification '
-                  '\n(raw features vs. standardized features)'.format(name.upper()), fontsize=40)
+        plt.title('{} k-NN multiclass classification '.format(name.upper()), fontsize=40)
         plt.legend(fontsize=20)
-        plt.savefig(fname='{}_plot_raw_vs_standardized.png'.format(name.lower()))
+        plt.savefig(fname='{}_plot_raw_vs_norm_standard.png'.format(name.lower()))
         print('Saved {} plot successfully!'.format(name))
 
 
 if __name__ == '__main__':
-    visualize_raw_vs_standard(['english-assembly'])
+    names_list = ['english-assembly-six']
+    visualize_raw_vs_norm_standard(names_list)
     #  visualize_train_test()
