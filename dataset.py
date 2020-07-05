@@ -40,7 +40,7 @@ def create_english_dataset():
     print('Done')
 
 if __name__ == '__main__':
-    create_english_dataset()
+    pass
 
 iemo = Dataset('Iemocap', IEMOCAP_FOLDER, 'English')
 ravdess = Dataset('Ravdess', RAVDESS_FOLDER, 'English')
@@ -49,3 +49,4 @@ savee = Dataset('SAVEE', SAVEE_FOLDER, 'English')
 tess = Dataset('TESS', TESS_FOLDER, 'English')
 emodb = Dataset('Emo-DB', EMODB_FOLDER, 'German')
 all_english_six = Dataset('English-Assembly-Six', ASSEMBLY_SIX_FOLDER, 'English' )
+datasets_list = [iemo, ravdess, cremad, savee, tess, emodb, all_english_six]
