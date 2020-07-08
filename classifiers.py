@@ -125,7 +125,26 @@ class KNNBaseMethod(KNearestNeighbors):
         summary.to_csv(filename, sep=';', index=False)
 
     def get_best_result(self, dataset):
+        best_results_dict = {
+            'preprocessing': ['raw', 'normalize', 'standardize'],
+            'n_neighbors': [],
+            'test_score': []
+        }
+        for file in os.listdir(self.results_folder):
+            if dataset.name.lower() in file and self.method_name.lower() in file and 'summary' in file:
+                filename = file
+        print(filename)
+        df = pd.read_csv(self.results_folder + filename, delimiter=';')
+        for preprocessing in ['raw', 'normalized', 'standardized']:
+            best_of_suffix = df.iloc[df['test_score_{}'.format(preprocessing)].argmax()]
+            best_k = best_of_suffix['n_neighbors']
+            best_score = (best_of_suffix['test_score_{}'.format(preprocessing)])
+            best_results_dict['n_neighbors'].append(best_k)
+            best_results_dict['test_score'].append(best_score)
+        best_results = pd.DataFrame(best_results_dict)
+        return best_results
         pass
+
 
 
 def knn_confusion_matrix(dataset, n):
@@ -143,15 +162,14 @@ def knn_confusion_matrix(dataset, n):
         normalize='true', xticks_rotation=30, cmap=plt.cm.Oranges,
     )
     disp.ax_.set_title('{} k-NN confusion matrix'.format(dataset.name))
-    filename = directory + '{}_knn_confusion_matrix.png'.format(dataset.name)
-    plt.savefig(fname=filename)
-    print('Saved {}'.format(filename))
-    plt.close()
+    plt.show()
+    # filename = directory + '{}_knn_confusion_matrix.png'.format(dataset.name)
+    # plt.savefig(fname=filename)
+    # print('Saved {}'.format(filename))
+    # plt.close()
 
 
 if __name__ == '__main__':
     knn = KNNBaseMethod('first_try')
-    preprocess_list = ['false', 'normalize', 'standardize']
-    for preprocess in preprocess_list:
-        knn.evaluate(all_english_six_pos_neg_neu, preprocess=preprocess)
-
+    print(knn.get_best_result(all_english_six_pos_neg_neu))
+    knn_confusion_matrix(all_english_six_pos_neg_neu, 11)

@@ -60,7 +60,7 @@ datasets_list_original = [iemo_original, ravdess_original,
 
 iemo_pos_neg_neu = Dataset('Iemocap-PosNegNeu', IEMOCAP_FOLDER, 'English', label='pos_neg_neu')
 ravdess_pos_neg_neu = Dataset('Ravdess-PosNegNeu', RAVDESS_FOLDER, 'English', label='pos_neg_neu')
-cremad_pos_neg_neu = Dataset('Crema-D-PosNegNeu', CREMAD_FOLDER, 'English', label='pos_neg_neu')
+cremad_pos_neg_neu = Dataset('Crema-DPosNegNeu', CREMAD_FOLDER, 'English', label='pos_neg_neu')
 savee_pos_neg_neu = Dataset('SAVEE-PosNegNeu', SAVEE_FOLDER, 'English', label='pos_neg_neu')
 tess_pos_neg_neu = Dataset('TESS-PosNegNeu', TESS_FOLDER, 'English', label='pos_neg_neu')
 emodb_pos_neg_neu = Dataset('Emo-DB-PosNegNeu', EMODB_FOLDER, 'German', label='pos_neg_neu')
