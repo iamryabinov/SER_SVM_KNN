@@ -150,4 +150,8 @@ def knn_confusion_matrix(dataset, n):
 
 
 if __name__ == '__main__':
-    pass
+    knn = KNNBaseMethod('first_try')
+    preprocess_list = ['false', 'normalize', 'standardize']
+    for preprocess in preprocess_list:
+        knn.evaluate(all_english_six_pos_neg_neu, preprocess=preprocess)
+
