@@ -9,10 +9,10 @@ class Dataset:
         self.language = language
         self.feature_folder = folder + 'features\\'
         self.feature_extractor = FeatureExtractor(folder, EXE_PATH, CONFIG_PATH, self.feature_folder)
-        path_to_feature_file = self.feature_folder + '_features_with_labels.csv'
-        if not os.path.exists(path_to_feature_file):
+        self.path_to_feature_file = self.feature_folder + '_features_with_labels.csv'
+        if not os.path.exists(self.path_to_feature_file):
             self.feature_extractor.extract()
-        self.features = FeatureFile(path_to_feature_file, label)
+        self.features = FeatureFile(self.path_to_feature_file, label)
         self.label = label
 
 
