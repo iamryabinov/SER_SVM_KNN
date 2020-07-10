@@ -23,11 +23,13 @@ class FeatureFile:
 
     def _get_xy(self, label):
         df = self.contents
-        X = df.drop(['name', 'label', 'frameTime', 'label_2'], axis=1).values
+        X = df.drop(['name', 'label', 'frameTime', 'label_2', 'label_3'], axis=1).values
         if label == 'original':
             y = df[['label']].values.ravel()
         elif label == 'pos_neg_neu':
             y = df[['label_2']].values.ravel()
+        elif label == 'negative_binary':
+            y = df[['label_3']].values.ravel()
         else:
             raise ValueError('Unknown value for "label": should be either "original" or "pos_neg_neu"')
         return X, y
@@ -43,11 +45,22 @@ def create_english_dataset():
     print('Done')
 
 
+def relabel(dataset):
+    print('Working with dataset {}'.format(dataset.name))
+    features = dataset.features.contents
+    print('Read file success')
+    features['label_3'] = features['label_2']
+    features.loc[(features['label_2'] == 'pos') | (features['label_2'] == 'neu'), 'label_3'] = 'not'
+    print('Relabel success')
+    features.to_csv(dataset.path_to_feature_file, index=False, sep=';')
+    print('Write file success')
+
+
 if __name__ == '__main__':
     pass
 
 iemo_original = Dataset('Iemocap', IEMOCAP_FOLDER, 'English', label='original')
-ravdess_original = Dataset('Ravdess', RAVDESS_FOLDER, 'English', label='original')
+ravdess_original = Dataset('RAVDESS', RAVDESS_FOLDER, 'English', label='original')
 cremad_original = Dataset('Crema-D', CREMAD_FOLDER, 'English', label='original')
 savee_original = Dataset('SAVEE', SAVEE_FOLDER, 'English', label='original')
 tess_original = Dataset('TESS', TESS_FOLDER, 'English', label='original')
@@ -59,13 +72,27 @@ datasets_list_original = [iemo_original, ravdess_original,
                           all_english_six_original]
 
 iemo_pos_neg_neu = Dataset('Iemocap-PosNegNeu', IEMOCAP_FOLDER, 'English', label='pos_neg_neu')
-ravdess_pos_neg_neu = Dataset('Ravdess-PosNegNeu', RAVDESS_FOLDER, 'English', label='pos_neg_neu')
-cremad_pos_neg_neu = Dataset('Crema-DPosNegNeu', CREMAD_FOLDER, 'English', label='pos_neg_neu')
+ravdess_pos_neg_neu = Dataset('RAVDESS-PosNegNeu', RAVDESS_FOLDER, 'English', label='pos_neg_neu')
+cremad_pos_neg_neu = Dataset('Crema-D-PosNegNeu', CREMAD_FOLDER, 'English', label='pos_neg_neu')
 savee_pos_neg_neu = Dataset('SAVEE-PosNegNeu', SAVEE_FOLDER, 'English', label='pos_neg_neu')
 tess_pos_neg_neu = Dataset('TESS-PosNegNeu', TESS_FOLDER, 'English', label='pos_neg_neu')
 emodb_pos_neg_neu = Dataset('Emo-DB-PosNegNeu', EMODB_FOLDER, 'German', label='pos_neg_neu')
-all_english_six_pos_neg_neu = Dataset('English-Assembly-Six-PosNegNeu', ASSEMBLY_SIX_FOLDER, 'English', label='pos_neg_neu')
+all_english_six_pos_neg_neu = Dataset('English-Assembly-Six-PosNegNeu', ASSEMBLY_SIX_FOLDER, 'English',
+                                      label='pos_neg_neu')
 datasets_list_pos_neg_neu = [iemo_pos_neg_neu, ravdess_pos_neg_neu,
                              cremad_pos_neg_neu, savee_pos_neg_neu,
                              tess_pos_neg_neu, emodb_pos_neg_neu,
                              all_english_six_pos_neg_neu]
+
+iemo_negative_binary = Dataset('Iemocap-NegativeBinary', IEMOCAP_FOLDER, 'English', label='negative_binary')
+ravdess_negative_binary = Dataset('RAVDESS-NegativeBinary', RAVDESS_FOLDER, 'English', label='negative_binary')
+cremad_negative_binary = Dataset('Crema-D-NegativeBinary', CREMAD_FOLDER, 'English', label='negative_binary')
+savee_negative_binary = Dataset('SAVEE-NegativeBinary', SAVEE_FOLDER, 'English', label='negative_binary')
+tess_negative_binary = Dataset('TESS-NegativeBinary', TESS_FOLDER, 'English', label='negative_binary')
+emodb_negative_binary = Dataset('Emo-DB-NegativeBinary', EMODB_FOLDER, 'German', label='negative_binary')
+all_english_six_negative_binary = Dataset('English-Assembly-Six-NegativeBinary', ASSEMBLY_SIX_FOLDER, 'English',
+                                          label='negative_binary')
+datasets_list_negative_binary = [emodb_negative_binary, ravdess_negative_binary,
+                                 cremad_negative_binary, savee_negative_binary,
+                                 tess_negative_binary, iemo_negative_binary,
+                                 all_english_six_negative_binary]

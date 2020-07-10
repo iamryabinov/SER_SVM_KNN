@@ -126,14 +126,19 @@ class KNNBaseMethod(KNearestNeighbors):
 
     def get_best_result(self, dataset):
         best_results_dict = {
+            'dataset': [dataset.name, dataset.name, dataset.name],
             'preprocessing': ['raw', 'normalize', 'standardize'],
             'n_neighbors': [],
             'test_score': []
         }
+        filename = ''
+        a = os.listdir(self.results_folder)
         for file in os.listdir(self.results_folder):
+            print(file)
             if dataset.name.lower() in file and self.method_name.lower() in file and 'summary' in file:
                 filename = file
-        print(filename)
+                print(filename)
+        # print(filename)
         df = pd.read_csv(self.results_folder + filename, delimiter=';')
         for preprocessing in ['raw', 'normalized', 'standardized']:
             best_of_suffix = df.iloc[df['test_score_{}'.format(preprocessing)].argmax()]
@@ -143,12 +148,17 @@ class KNNBaseMethod(KNearestNeighbors):
             best_results_dict['test_score'].append(best_score)
         best_results = pd.DataFrame(best_results_dict)
         return best_results
-        pass
 
-
+    def summarize_best_results(self, datasets_list):
+        best_results_list = []
+        for dataset in datasets_list:
+            best_results_list.append(self.get_best_result(dataset))
+        best_results_df = pd.concat(best_results_list, ignore_index=True)
+        filename = f'{self.results_folder}{self.method_name}_best_results.csv'
+        best_results_df.to_csv(filename, sep=';', index=False)
 
 def knn_confusion_matrix(dataset, n):
-    directory = 'plots\\knn\\confusion_matrix\\'
+    directory = 'plots\\knn_binary\\confusion_matrix\\'
     if not os.path.exists(directory):
         os.makedirs(directory)
     X = dataset.features.X
@@ -170,6 +180,17 @@ def knn_confusion_matrix(dataset, n):
 
 
 if __name__ == '__main__':
-    knn = KNNBaseMethod('first_try')
-    print(knn.get_best_result(all_english_six_pos_neg_neu))
-    knn_confusion_matrix(all_english_six_pos_neg_neu, 11)
+    knn_three_label = KNNBaseMethod('first_try')
+    print('Working with method {}'.format(knn_three_label.method_name))
+    knn_three_label.summarize_best_results(datasets_list_pos_neg_neu)
+
+    knn_multilabel = KNNBaseMethod('base-multi')
+    knn_multilabel.summarize_best_results(datasets_list_original)
+
+    knn_binary = KNNBaseMethod('binary')
+    for dataset in datasets_list_negative_binary:
+        for preprocess in ['false', 'normalize', 'standardize']:
+            knn_binary.evaluate(dataset, preprocess=preprocess)
+        knn_binary.summarize_results(dataset)
+    knn_binary.summarize_best_results(datasets_list_negative_binary)
+
