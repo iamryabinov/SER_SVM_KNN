@@ -157,6 +157,8 @@ class KNNBaseMethod(KNearestNeighbors):
         filename = f'{self.results_folder}{self.method_name}_best_results.csv'
         best_results_df.to_csv(filename, sep=';', index=False)
 
+    
+
 def knn_confusion_matrix(dataset, n):
     directory = 'plots\\knn_binary\\confusion_matrix\\'
     if not os.path.exists(directory):
@@ -178,19 +180,52 @@ def knn_confusion_matrix(dataset, n):
     # print('Saved {}'.format(filename))
     # plt.close()
 
+def summarize_all(datasets_list, methods_list):
+    results_dfs_list = []
+    for dataset in datasets_list:
+        for method in methods_list:
+            results_file = ''
+            for file in os.listdir(method.results_folder):
+                if dataset.name.lower() in file and method.method_name.lower() in file and 'summary' in file:
+                    results_file = method.results_folder + file
+            results_df = pd.read_csv(results_file, delimiter=';')
+            results_df['method_name'] = method.method_name
+            results_df['dataset_name'] = dataset.name
+            results_dfs_list.append(results_df)
+            all_results_df = pd.concat(results_dfs_list, ignore_index=True)
+            filename = f'{method.results_folder}knn_summarized_results.csv'
+            all_results_df.to_csv(filename, sep=';', index=False)
+
+def refactor_csv(datasets_list, methods_list):
+    print('Process starting...')
+    start_df = pd.read_csv('classifiers\\knn\\knn_summarized_results.csv', delimiter=';')
+    dfs_list = []
+    for dataset in datasets_list:
+        for method in methods_list:
+            print('{}||{}...'.format(dataset.name, method.method_name))
+            current_df = start_df.loc[(start_df['dataset_name'] == dataset.name)
+                                      & (start_df['method_name'] == method.method_name)]
+            for prep in ['raw', 'normalized', 'standardized']:
+                print('\t{}'.format(prep))
+                data = {
+                    'dataset': current_df['dataset_name'],
+                    'method': current_df['method_name'],
+                    'preprocessing': prep,
+                    'n_neighbors': current_df['n_neighbors'],
+                    'train_score': current_df[f'train_score_{prep}'],
+                    'test_score': current_df[f'test_score_{prep}']
+                }
+                dfs_list.append(pd.DataFrame(data))
+    final_df = pd.concat(dfs_list, ignore_index=True)
+    final_df.to_csv('classifiers\\knn\\knn_summarized_results_final.csv', sep=';', index=False)
+
+
+
 
 if __name__ == '__main__':
     knn_three_label = KNNBaseMethod('first_try')
-    print('Working with method {}'.format(knn_three_label.method_name))
-    knn_three_label.summarize_best_results(datasets_list_pos_neg_neu)
-
     knn_multilabel = KNNBaseMethod('base-multi')
-    knn_multilabel.summarize_best_results(datasets_list_original)
-
     knn_binary = KNNBaseMethod('binary')
-    for dataset in datasets_list_negative_binary:
-        for preprocess in ['false', 'normalize', 'standardize']:
-            knn_binary.evaluate(dataset, preprocess=preprocess)
-        knn_binary.summarize_results(dataset)
-    knn_binary.summarize_best_results(datasets_list_negative_binary)
+    methods_list = [knn_multilabel, knn_three_label, knn_binary]
+    refactor_csv(datasets_list_original, methods_list)
 
