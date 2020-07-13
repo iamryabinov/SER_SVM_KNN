@@ -79,7 +79,9 @@ def visualize_raw_vs_norm_standard(names_list):
         print('Saved {} plot successfully!'.format(name))
 
 
+
+
 if __name__ == '__main__':
-    names_list = ['english-assembly-six']
-    visualize_raw_vs_norm_standard(names_list)
-    #  visualize_train_test()
+    pass
+
+
