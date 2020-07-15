@@ -13,8 +13,8 @@ def plot_tsne(dataset):
     dataset.name = dataset.name.split('_')[0].lower()
     X, y = dataset.features.X, dataset.features.y.ravel()
     X = StandardScaler().fit_transform(X)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, stratify=y, test_size=0.5)
-    if len(y) > 2500:
+    if len(y) > 1000:
+        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, stratify=y, test_size=1000)
         X = X_test
         y = y_test
         print('Fetched data')
@@ -54,7 +54,7 @@ def plot_tsne(dataset):
         print('Fitting TSNE (perplexity = {})...'.format(perplexity))
         tsne_obj = tsne.fit_transform(X)
         print('Plotting...')
-        directory = 'plots\\tsne\\{}\\'.format(dataset.name)
+        directory = 'plots\\tsne\\{}_{}\\'.format(dataset.name, dataset.label)
         if not os.path.exists(directory):
             os.makedirs(directory)
         for attempt in range(6):
@@ -64,17 +64,17 @@ def plot_tsne(dataset):
                                         'Emotion': y})
                 sns.scatterplot(x="X", y="Y",
                                 hue="Emotion",
-                                hue_order=hue_order,
+
                                 legend='full',
                                 data=tsne_df,
                                 style='Emotion',
-                                markers=markers,
+
                                 s=30,
                                 alpha=0.9,
-                                palette=palette,
+
                                 linewidth=0.3,
                                 edgecolor='k'
-                                )
+                                )   #hue_order = hue_order, markers=markers, palette=palette,
                 plt.title('{} T-SNE'.format(dataset.name))
                 filename = directory + '{}_tsne_{}.png'.format(dataset.name, perplexity)
                 plt.savefig(fname=filename)
@@ -84,5 +84,51 @@ def plot_tsne(dataset):
                 raise
             break
 
+
+def create_tsne_file():
+    tsne_dfs = []
+    dataset_perplexity = {
+        iemo_original: 70,
+        cremad_original: 22,
+        all_english_six_original: 71,
+        emodb_original: 37,
+        ravdess_original: 41,
+        savee_original: 21,
+        tess_original: 37
+    }
+    for dataset in datasets_list_original:
+        print('\nWORKING WITH {}'.format(dataset.name))
+        dataset.name = dataset.name.split('_')[0].lower()
+        X, y = dataset.features.X, dataset.features.y.ravel()
+        X = StandardScaler().fit_transform(X)
+        if len(y) > 1001:
+            X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, stratify=y, test_size=1000)
+            X = X_test
+            y = y_test
+            print('Fetched data')
+        perplexity = dataset_perplexity[dataset]
+        tsne = TSNE(perplexity=perplexity,
+                    random_state=0,
+                    n_iter=5000,
+                    n_iter_without_progress=2000,
+                    init='pca',
+                    learning_rate=0.1,
+                    early_exaggeration=2)
+        print('Fitting TSNE (perplexity = {})...'.format(perplexity))
+        tsne_obj = tsne.fit_transform(X)
+        print('Creating Dataframe...')
+        tsne_df = pd.DataFrame({'Dataset': dataset.name,
+                                'X': tsne_obj[:, 0],
+                                'Y': tsne_obj[:, 1],
+                                'Emotion': y})
+        tsne_dfs.append(tsne_df)
+        print('Appended')
+    print('Concatenating...')
+    df = pd.concat(tsne_dfs, ignore_index=True)
+    df.to_csv('tsne_results.csv', sep=';', index=False)
+
+
 if __name__ == '__main__':
-    pass
+    create_tsne_file()
+    for dataset in datasets_list_negative_binary[1:]:
+        plot_tsne(dataset)

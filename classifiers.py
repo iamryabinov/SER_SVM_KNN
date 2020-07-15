@@ -132,7 +132,6 @@ class KNNBaseMethod(KNearestNeighbors):
             'test_score': []
         }
         filename = ''
-        a = os.listdir(self.results_folder)
         for file in os.listdir(self.results_folder):
             print(file)
             if dataset.name.lower() in file and self.method_name.lower() in file and 'summary' in file:

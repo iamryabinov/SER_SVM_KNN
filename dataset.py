@@ -66,9 +66,12 @@ savee_original = Dataset('SAVEE', SAVEE_FOLDER, 'English', label='original')
 tess_original = Dataset('TESS', TESS_FOLDER, 'English', label='original')
 emodb_original = Dataset('Emo-DB', EMODB_FOLDER, 'German', label='original')
 all_english_six_original = Dataset('English-Assembly-Six', ASSEMBLY_SIX_FOLDER, 'English', label='original')
-datasets_list_original = [iemo_original, ravdess_original,
-                          cremad_original, savee_original,
-                          tess_original, emodb_original,
+df = all_english_six_original.features.contents
+df = df.loc[(df['label'] == 'ang') | (df['label'] == 'dis') | (df['label'] == 'fea') | (df['label'] == 'hap') | (df['label'] == 'neu') | (df['label'] == 'sad')]
+all_english_six_original.features.contents = df
+datasets_list_original = [savee_original,tess_original,
+                          ravdess_original,cremad_original,
+                          iemo_original, emodb_original,
                           all_english_six_original]
 
 iemo_pos_neg_neu = Dataset('Iemocap-PosNegNeu', IEMOCAP_FOLDER, 'English', label='pos_neg_neu')
@@ -96,3 +99,6 @@ datasets_list_negative_binary = [emodb_negative_binary, ravdess_negative_binary,
                                  cremad_negative_binary, savee_negative_binary,
                                  tess_negative_binary, iemo_negative_binary,
                                  all_english_six_negative_binary]
+
+if __name__ == '__main__':
+    print(all_english_six_original.features.contents.groupby('label').count())
