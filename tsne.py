@@ -129,6 +129,5 @@ def create_tsne_file():
 
 
 if __name__ == '__main__':
-    create_tsne_file()
-    for dataset in datasets_list_negative_binary[1:]:
-        plot_tsne(dataset)
+    pass
+
