@@ -6,6 +6,8 @@ import seaborn as sns
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
+import matplotlib as mpl
+
 
 
 def plot_tsne(dataset):
@@ -120,14 +122,56 @@ def create_tsne_file():
         tsne_df = pd.DataFrame({'Dataset': dataset.name,
                                 'X': tsne_obj[:, 0],
                                 'Y': tsne_obj[:, 1],
-                                'Emotion': y})
+                                'Label': y})
         tsne_dfs.append(tsne_df)
         print('Appended')
     print('Concatenating...')
     df = pd.concat(tsne_dfs, ignore_index=True)
     df.to_csv('tsne_results.csv', sep=';', index=False)
 
+def visualize_tsne():
+    mpl.use('Qt5Agg')
+    data = pd.read_csv('tsne_results.csv', delimiter=';')
+    data = data.loc[data['Label type'] == 'Binary']
+    data = data.loc[data['Dataset'] != 'English Assembly Six']
+    sns.set(font="Arial", style='white', context='paper', font_scale=1.5)
+    palette = {'ang': '#FF0000',
+               'hap': '#23FF00',
+               'sad': '#3D00FF',
+               'neu': '#5D5D5D',
+               'dis': '#A400FF',
+               'fea': '#00FFFF',
+               'sur': '#00A700',
+               'cal': '#A78A00',
+               'exc': '#FFD300',
+               'fru': '#FF7400',
+               'bor': '#A78A00',
+               'neg': '#FF0000',
+               'rest': '#23FF00'
+               }
+    markers = {
+        'neg': 'x',
+        'rest': '+'
+    }
+    g = sns.relplot(x="X", y="Y",
+                    hue="Label", palette=palette,
+                    col='Dataset', col_wrap=3,
+                    legend='full', height=4, aspect=1,
+                    kind="scatter", data=data, facet_kws={'sharex': False, 'sharey': False},
+                    s=15
+                    )
+    for ax, title in zip(g.axes.flat, ['а', 'б', 'в', 'г', 'д', 'е']):
+        ax.set_title('')
+        ax.set_ylabel('')
+        ax.set_xlabel(title)
+        ax.set_xticklabels([])
+        ax.set_yticklabels([])
+        # ax.title.set_position([0.3, -0.01])
+    sns.despine(top=False, right=False, left=False, bottom=False, offset=None, trim=False)
+    plt.show()
+
+
 
 if __name__ == '__main__':
-    pass
+    visualize_tsne()
 

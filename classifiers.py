@@ -2,7 +2,7 @@ from dataset import *
 from sklearn.preprocessing import StandardScaler, Normalizer
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import plot_confusion_matrix, classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -219,12 +219,43 @@ def refactor_csv(datasets_list, methods_list):
     final_df.to_csv('classifiers\\knn\\knn_summarized_results_final.csv', sep=';', index=False)
 
 
+def report(dataset, neighbors):
+    X = dataset.features.X
+    y = dataset.features.y.ravel()
+    X = StandardScaler().fit_transform(X)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, stratify=y)
+    knn = KNeighborsClassifier(n_neighbors=neighbors)
+    knn.fit(X_train, y_train)
+    y_pred = knn.predict(X_test)
+    print('===========================================')
+    print('{} CLASSIFICATION REPORT:'.format(dataset.name.upper()))
+    print(classification_report(y_test, y_pred, zero_division=0))
+    # print(confusion_matrix(y_test, y_pred, normalize='true'))
+    # plot_confusion_matrix(knn, X_test, y_test, normalize='true')
+    # plt.show()
+
+dataset_neighbors_dict = {
+    iemo_original: 69,
+    cremad_original: 55,
+    emodb_original: 13,
+    ravdess_original: 5,
+    savee_original: 7,
+    tess_original: 20,
+    all_english_six_original: 17,
+    iemo_negative_binary: 25,
+    cremad_negative_binary: 39,
+    emodb_negative_binary: 27,
+    ravdess_negative_binary: 7,
+    savee_negative_binary: 11,
+    tess_negative_binary: 9,
+    all_english_six_negative_binary: 13
+}
+
+
 
 
 if __name__ == '__main__':
-    knn_three_label = KNNBaseMethod('first_try')
-    knn_multilabel = KNNBaseMethod('base-multi')
-    knn_binary = KNNBaseMethod('binary')
-    methods_list = [knn_multilabel, knn_three_label, knn_binary]
-    refactor_csv(datasets_list_original, methods_list)
+    for dataset, neighbors in zip(dataset_neighbors_dict.keys(), dataset_neighbors_dict.values()):
+        report(dataset, neighbors)
+
 
