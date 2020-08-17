@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0072)http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Evaluation.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/No Sidebars.dwt" codeOutsideHTMLIsLocked="false" --><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Surrey Audio-Visual Expressed Emotion (SAVEE) Database</title>
+<meta name="Description" content="Surrey Audio-Visual Expressed Emotion (SAVEE) Database">
+<meta name="Keywords" content="SAVEE, audio-visual, multimodal, emotion, expression, affect, affective, classification, recognition, database">
+<meta name="content-language" content="en-GB">
+<link rel="icon" href="http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/images/FaceJK_icon.png" type="image/png">
+<!-- InstanceEndEditable -->
+<link href="./evaluation_files/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./evaluation_files/jquery.min.js.&#1041;&#1077;&#1079; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1103;"></script>
+<script type="text/javascript" src="./evaluation_files/hoverIntent.js.&#1041;&#1077;&#1079; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1103;"></script>
+<script type="text/javascript" src="./evaluation_files/superfish.js.&#1041;&#1077;&#1079; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1103;"></script>
+<script type="text/javascript" src="./evaluation_files/supersubs.js.&#1041;&#1077;&#1079; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1103;"></script>
+<script type="text/javascript"> 
+    $(document).ready(function(){ 
+        $("ul.sf-menu").supersubs({ 
+            minWidth:    12,   // minimum width of sub-menus in em units 
+            maxWidth:    27,   // maximum width of sub-menus in em units 
+            extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
+                               // due to slight rounding differences and font-family 
+        }).superfish();  // call supersubs first, then superfish, so that subs are 
+                         // not display:none when measuring. Call before initialising 
+                         // containing tabs for same reason. 
+    }); 
+</script>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<style>._3emE9--dark-theme .-S-tR--ff-downloader{background:rgba(30,30,30,.93);border:1px solid rgba(82,82,82,.54);box-shadow:0 4px 7px rgba(30,30,30,.55);color:#fff}._3emE9--dark-theme .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn{background:#3d4b52}._3emE9--dark-theme .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn:hover{background:#131415}._3emE9--dark-theme .-S-tR--ff-downloader ._10vpG--footer{background:rgba(30,30,30,.93)}._2mDEx--white-theme .-S-tR--ff-downloader{background:#fff;border:1px solid rgba(82,82,82,.54);box-shadow:0 4px 7px rgba(30,30,30,.55);color:#314c75}._2mDEx--white-theme .-S-tR--ff-downloader ._6_Mtt--header{font-weight:700}._2mDEx--white-theme .-S-tR--ff-downloader ._2dFLA--container ._2bWNS--notice{border:0;color:rgba(0,0,0,.88)}._2mDEx--white-theme .-S-tR--ff-downloader ._10vpG--footer{background:#fff}.-S-tR--ff-downloader{display:block;overflow:hidden;position:fixed;bottom:20px;right:7.1%;width:330px;height:180px;background:rgba(30,30,30,.93);border-radius:2px;color:#fff;z-index:99999999;border:1px solid rgba(82,82,82,.54);box-shadow:0 4px 7px rgba(30,30,30,.55);transition:.5s}.-S-tR--ff-downloader._3M7UQ--minimize{height:62px}.-S-tR--ff-downloader._3M7UQ--minimize .nxuu4--file-info,.-S-tR--ff-downloader._3M7UQ--minimize ._6_Mtt--header{display:none}.-S-tR--ff-downloader ._6_Mtt--header{padding:10px;font-size:17px;font-family:sans-serif}.-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn{float:right;background:#f1ecec;height:20px;width:20px;text-align:center;padding:2px;margin-top:-10px;cursor:pointer}.-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn:hover{background:#e2dede}.-S-tR--ff-downloader ._13XQ2--error{color:red;padding:10px;font-size:12px;line-height:19px}.-S-tR--ff-downloader ._2dFLA--container{position:relative;height:100%}.-S-tR--ff-downloader ._2dFLA--container .nxuu4--file-info{padding:6px 15px 0;font-family:sans-serif}.-S-tR--ff-downloader ._2dFLA--container .nxuu4--file-info div{margin-bottom:5px;width:100%;overflow:hidden}.-S-tR--ff-downloader ._2dFLA--container ._2bWNS--notice{margin-top:21px;font-size:11px}.-S-tR--ff-downloader ._10vpG--footer{width:100%;bottom:0;position:absolute;font-weight:700}.-S-tR--ff-downloader ._10vpG--footer ._2V73d--loader{-webkit-animation:n0BD1--rotation 3.5s linear forwards;animation:n0BD1--rotation 3.5s linear forwards;position:absolute;top:-120px;left:calc(50% - 35px);border-radius:50%;border:5px solid #fff;border-top-color:#a29bfe;height:70px;width:70px;display:flex;justify-content:center;align-items:center}.-S-tR--ff-downloader ._10vpG--footer ._24wjw--loading-bar{width:100%;height:18px;background:#dfe6e9;border-radius:5px}.-S-tR--ff-downloader ._10vpG--footer ._24wjw--loading-bar ._1FVu9--progress-bar{height:100%;background:#8bc34a;border-radius:5px}.-S-tR--ff-downloader ._10vpG--footer ._2KztS--status{margin-top:10px}.-S-tR--ff-downloader ._10vpG--footer ._2KztS--status ._1XilH--state{float:left;font-size:.9em;letter-spacing:1pt;text-transform:uppercase;width:100px;height:20px;position:relative}.-S-tR--ff-downloader ._10vpG--footer ._2KztS--status ._1jiaj--percentage{float:right}</style></head>
+<body>
+<div id="nav" class="container_12 rounded" style="text-align:center;">
+
+<font size="+3"><font color="white">Surrey Audio-Visual Expressed Emotion (SAVEE) Database</font></font>
+</div>
+
+<div id="nav" class="container_12 rounded">
+  <ul class="sf-menu sf-js-enabled sf-shadow">
+    <li class="first-item"><a href="http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/" style="border-left:none;">Home</a> </li>
+    <li>  <a href="http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Introduction.html">Introduction</a>   </li>
+    <li> <a href="http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Database.html">Database</a> </li>
+    <li> <a href="http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Evaluation.html">Evaluation</a> </li>
+    <li> <a href="http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/References.html">References</a> </li>
+    <li> <a href="http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Download.html">Download</a> </li>
+  </ul>
+</div>
+
+<div id="content" class="container_12 rounded">
+
+  <div class="grid_12"><!-- InstanceBeginEditable name="MainContent" -->
+      <h2><font color="blue">Subjective evaluation</font></h2>
+    <p>The quality of recorded data was checked by performing subjective
+evaluation of database. These tests provide a bench mark
+for evaluation of emotion recognition systems on this database.
+Each actor's data were evaluated by 10 subjects, of which 5
+were native English speakers and the rest of them had lived in
+UK for more than a year. All of them were students at University of Surrey. 
+It has been suggested that females experience
+emotion more intensively than men [16], so to avoid gender biasing
+half of the evaluators were female. The age of subjects
+was in the range of 21 to 29 years, with an average of 25 years
+for male subjects, 23 years for female subjects, and 24 years
+over all subjects. The subjective evaluation was performed at
+utterance level in three ways: audio, visual, and audio-visual.
+The 120 clips from each actor were divided into 10 groups, resulting 12 clips per
+group. To remove the systematic bias from the responses of
+evaluators, the groups were randomized. For each evaluator, a
+different data set was created for each of the audio, visual and
+audio-visual data per actor using a Balanced Latin Square [17],
+which resulted in 10 different sets for each of the audio, visual
+and audio-visual data per actor. The subjects were trained by using
+slides containing three facial expression pictures, two audio
+files, and a short movie clip for each of the emotions. Subjects
+were not given any additional speaker-dependent training, although
+some of the actors were known to some of them. The
+subjects were asked to play audio, visual and audio-visual clips
+and select from one of the seven emotions on a paper sheet. The
+responses were averaged over 10 subjects for each actor.
+</p> <p>
+Classification accuracies for audio, visual and audio-visual
+data for 7 emotion classes over 4 actors by 10 evaluators are
+given in Table 1. The results show higher classification accuracy
+for the visual data compared to the audio, yet the overall
+performance improved by combining the two modalities. For
+the audio data, disgust was highly confused with neutral, fear
+with sadness and surprise, and happiness and surprise with each
+other. For the visual data, fear was highly confused with surprise,
+and for the audio-visual data, fear was confused with sadness.
+The results show greater clarity of the visual data compared
+to audio indicating the importance of facial expression.
+Overall, the expressed emotions for 441 out of 480 sentences
+were correctly classified by at least 8 out of the 10 subjects under
+audio-visual conditions, indicating good agreement with the
+actors' intended affect over the database.</p> <br>
+
+<table border="2">  
+<caption align="bottom">Table 1: Average human classification accuracy (%) for 7 emotion classes, over 10
+participants. Mean is averaged over 4 actors' data with 95% confidence interval (CI)
+based on standard error (n=40).</caption>
+<tbody><tr>
+<th><b>&nbsp;Modality&nbsp;</b></th><th><b>&nbsp;KL&nbsp;</b></th><th><b>&nbsp;JE&nbsp;</b></th><th><b>&nbsp;JK&nbsp;</b></th><th><b>&nbsp;DC&nbsp;</b></th><th><b>&nbsp;Mean (±CI)&nbsp;</b></th>
+</tr>
+<tr>
+<td>&nbsp;Audio&nbsp;</td><td>&nbsp;53.2&nbsp;</td><td>&nbsp;67.7&nbsp;</td><td>&nbsp;71.2&nbsp;</td><td>&nbsp;73.7&nbsp;</td><td>&nbsp;66.5 ± 2.5&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;Visual&nbsp;</td><td>&nbsp;89.0&nbsp;</td><td>&nbsp;89.8&nbsp;</td><td>&nbsp;88.6&nbsp;</td><td>&nbsp;84.7&nbsp;</td><td>&nbsp;88.0 ± 0.6&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;Audio-visual&nbsp;</td><td>&nbsp;92.1&nbsp;</td><td>&nbsp;92.1&nbsp;</td><td>&nbsp;91.3&nbsp;</td><td>&nbsp;91.7&nbsp;</td><td>&nbsp;91.8 ± 0.1&nbsp;</td>
+</tr>
+</tbody></table>
+
+
+<hr>
+
+    <h2><font color="blue">Baseline system</font></h2>
+    
+    <h3><font color="blue">Speaker-dependent classification</font></h3>
+ 
+<p> 
+The speaker-dependent emotion classification have been performed by using
+106 audio features related to Pitch, Energy, MFCCs and Duration,
+and 240 visual features related to Marker Position [20]. Features
+were selected by Plus l-Take Away r algorithm using
+Bhattacharyya distance criterion, to remove irrelevant data. The
+top 40 features chosen for each modality were subjected to Principal
+Component Analysis (PCA) or Linear Discriminant Analysis
+(LDA) for feature reduction. Classification of audio, visual
+and combined audio-visual data was achieved with a Gaussian
+classifier. In the audio-visual experiments, the posterior probabilities
+from audio and visual modalities were multiplied with
+equal weighting to get the final result. Each actor's data were divided
+into 4 sets in a jack-knife procedure, where in each round
+three sets were used for training and one for testing, and the
+results averaged. The best classification accuracies for 7 emotion
+classes were achieved with 6 LDA (or 10 PCA) features.
+Mean classification accuracy for audio was 56% with LDA
+(50% with PCA), and for visual was 95% with LDA (92%
+with PCA). Fusion of both modalities improved the result to
+98% for LDA (93% for PCA). To summarize, the visual features
+performed better than audio, while combined modalities
+worked best. </p>
+
+
+    <h3><font color="blue">Speaker-independent classification</font></h3>
+
+<p>
+Speaker-independent experiments were performed on all extracted
+audio and visual features by leave-one-speaker-out procedure,
+and the results averaged over the 4 tests. The feature
+selection, feature reduction and Gaussian classification were
+performed as for the speaker-dependent case. In addition, a
+Support Vector Machine (SVM) classifier using RBF and Polynomial
+kernels was tested (using features after selection since
+feature reduction did not improve its performance). For audio,
+speaker normalization by mean and standard deviation increased
+the classification accuracy [21]. For visual, translation,
+rotation and mapping markers onto a reference speaker [19],
+improved the result. The SVM outperformed the Gaussian classifier
+for both audio and visual modalities. The best classification
+accuracy for 7 emotions was achieved with SVM and
+Polynomial kernel: 61% with 126 audio features, 65% with 85
+visual features, and 84% with audio-visual combined at decision-level. 
+The results reveal that both modalities contributed to
+the emotion classification and a substantial gain was achieved
+when combined. </p>
+
+  <!-- InstanceEndEditable --></div>
+
+  <div class="clear"></div>
+</div>
+<div id="footer" class="container_12 topborder">
+  <div class="grid_6" style="text-align:left;"><a href="http://www.surrey.ac.uk/">University of Surrey</a> | 
+<a href="http://www.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Register.html">Register</a> | 
+<a href="mailto:p.jackson@surrey.ac.uk?subject=SAVEE">Contact Us</a>
+<!-- <a href="http://personal.ee.surrey.ac.uk/Personal/P.Jackson/">Contact Us</a> -->
+ </div>
+</div>
+<div id="credit" class="container_12">
+
+
+  <!-- The following link and credit cannot legally be altered or removed without a valid website license key purchased from http://www.justdreamweaver.com/templates/license.html. License keys are only $19.99 and once purchased you are free to remove or alter the link. -->
+
+<div class="grid_12">
+Last update: 2 April 2015
+<br>
+Authors: Philip Jackson and Sanaul Haq
+<br>
+Designed by <a href="http://www.justdreamweaver.com/dreamweaver-templates.html" target="_blank">JustDreamweaver.com</a>
+
+</div>
+</div>
+
+<!-- InstanceEnd -->
+</body><div></div></html>
