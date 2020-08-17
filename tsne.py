@@ -132,7 +132,7 @@ def create_tsne_file():
 def visualize_tsne():
     mpl.use('Qt5Agg')
     data = pd.read_csv('tsne_results.csv', delimiter=';')
-    data = data.loc[data['Label type'] == 'Binary']
+    data = data.loc[data['Label type'] == 'Descrete']
     data = data.loc[data['Dataset'] != 'English Assembly Six']
     sns.set(font="Arial", style='white', context='paper', font_scale=1.5)
     palette = {'ang': '#FF0000',
