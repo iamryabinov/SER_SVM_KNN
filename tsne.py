@@ -132,7 +132,7 @@ def create_tsne_file():
 def visualize_tsne():
     mpl.use('Qt5Agg')
     data = pd.read_csv('tsne_results.csv', delimiter=';')
-    data = data.loc[data['Label type'] == 'Descrete']
+    data = data.loc[data['Label type'] == 'Binary']
     data = data.loc[data['Dataset'] != 'English Assembly Six']
     col_order = ['Crema-D', 'Emo-DB', 'IEMOCAP', 'RAVDESS', 'SAVEE', 'TESS']
     hue_order = ['ang', 'hap', 'neu', 'sad', 'dis', 'fea', 'sur', 'cal', 'exc', 'fru', 'bor', 'neg', 'rest']
