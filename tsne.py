@@ -169,15 +169,16 @@ def tsne_for_assembly():
         tsne_dfs.append(tsne_df)
         print('Appended')
     print('Concatenating...')
-    df = pd.concat(tsne_dfs, ignore_index=True)
+    df = tsne_df
+    # df = pd.concat(tsne_dfs, ignore_index=True)
     df.to_csv('tsne_results_assembly.csv', sep=';', index=False)
 
 def visualize_tsne():
     mpl.use('Qt5Agg')
-    data = pd.read_csv('tsne_results.csv', delimiter=';')
-    data = data.loc[data['Label type'] == 'Descrete']
-    data = data.loc[data['Dataset'] != 'English Assembly Six']
-    col_order = ['Crema-D', 'Emo-DB', 'IEMOCAP', 'RAVDESS', 'SAVEE', 'TESS']
+    data = pd.read_csv('tsne_results_assembly.csv', delimiter=';')
+    # data = data.loc[data['Label type'] == 'Descrete']
+    # data = data.loc[data['Dataset'] == 'English Assembly Six']
+    # col_order = ['Crema-D', 'Emo-DB', 'IEMOCAP', 'RAVDESS', 'SAVEE', 'TESS']
     # hue_order = ['ang', 'hap', 'neu', 'sad', 'dis', 'fea', 'sur', 'cal', 'exc', 'fru', 'bor', 'neg', 'rest']
     sns.set(font="Arial", style='white', context='paper', font_scale=1.5)
     palette = {'ang': '#FF0000',
@@ -200,12 +201,12 @@ def visualize_tsne():
     }
     g = sns.relplot(x="X", y="Y",
                     hue="Label", palette=palette,
-                    col='Dataset', col_wrap=3, col_order=col_order,
+                    col='Label type', col_wrap=2,
                     legend='full', height=4, aspect=1,
                     kind="scatter", data=data, facet_kws={'sharex': False, 'sharey': False},
-                    s=15, linewidth=0, 
+                    s=8, linewidth=0, alpha=0.75
                     )
-    for ax, title in zip(g.axes.flat, ['а', 'б', 'в', 'г', 'д', 'е']):
+    for ax, title in zip(g.axes.flat, ['а', 'б']):
         ax.set_title('')
         ax.set_ylabel('')
         ax.set_xlabel(title)
@@ -218,5 +219,5 @@ def visualize_tsne():
 
 
 if __name__ == '__main__':
-    tsne_for_assembly()
+    visualize_tsne()
 
