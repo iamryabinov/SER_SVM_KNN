@@ -179,7 +179,7 @@ def visualize_tsne():
     # data = data.loc[data['Label type'] == 'Descrete']
     # data = data.loc[data['Dataset'] == 'English Assembly Six']
     # col_order = ['Crema-D', 'Emo-DB', 'IEMOCAP', 'RAVDESS', 'SAVEE', 'TESS']
-    # hue_order = ['ang', 'hap', 'neu', 'sad', 'dis', 'fea', 'sur', 'cal', 'exc', 'fru', 'bor', 'neg', 'rest']
+    hue_order = ['ang', 'hap', 'neu', 'sad', 'dis', 'fea', 'neg', 'rest']
     sns.set(font="Arial", style='white', context='paper', font_scale=1.5)
     palette = {'ang': '#FF0000',
                'hap': '#23FF00',
@@ -200,11 +200,11 @@ def visualize_tsne():
         'rest': '+'
     }
     g = sns.relplot(x="X", y="Y",
-                    hue="Label", palette=palette,
+                    hue="Label", hue_order=hue_order, palette=palette,
                     col='Label type', col_wrap=2,
                     legend='full', height=4, aspect=1,
                     kind="scatter", data=data, facet_kws={'sharex': False, 'sharey': False},
-                    s=8, linewidth=0, alpha=0.75
+                    s=4, linewidth=0, alpha=0.75
                     )
     for ax, title in zip(g.axes.flat, ['а', 'б']):
         ax.set_title('')

@@ -255,7 +255,4 @@ dataset_neighbors_dict = {
 
 
 if __name__ == '__main__':
-    for dataset, neighbors in zip(dataset_neighbors_dict.keys(), dataset_neighbors_dict.values()):
-        report(dataset, neighbors)
-
-
+    report(all_english_six_original, 17)
