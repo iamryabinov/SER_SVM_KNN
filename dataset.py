@@ -56,9 +56,6 @@ def relabel(dataset):
     print('Write file success')
 
 
-if __name__ == '__main__':
-    pass
-
 iemo_original = Dataset('Iemocap', IEMOCAP_FOLDER, 'English', label='original')
 ravdess_original = Dataset('RAVDESS', RAVDESS_FOLDER, 'English', label='original')
 cremad_original = Dataset('Crema-D', CREMAD_FOLDER, 'English', label='original')
@@ -70,8 +67,7 @@ df = all_english_six_original.features.contents
 df = df.loc[(df['label'] == 'ang') | (df['label'] == 'dis') | (df['label'] == 'fea') | (df['label'] == 'hap') | (df['label'] == 'neu') | (df['label'] == 'sad')]
 all_english_six_original.features.contents = df
 all_english_six_original.features.X, all_english_six_original.features.y = all_english_six_original.features._get_xy(label='original')
-datasets_list_original = [savee_original,tess_original,
-                          ravdess_original,cremad_original,
+datasets_list_original = [ravdess_original, cremad_original, savee_original, tess_original,
                           iemo_original, emodb_original,
                           all_english_six_original]
 
@@ -100,7 +96,3 @@ datasets_list_negative_binary = [emodb_negative_binary, ravdess_negative_binary,
                                  cremad_negative_binary, savee_negative_binary,
                                  tess_negative_binary, iemo_negative_binary,
                                  all_english_six_negative_binary]
-
-if __name__ == '__main__':
-    print(all_english_six_original.features.contents.groupby('label').count())
-    print(list(set(all_english_six_original.features.y)))
