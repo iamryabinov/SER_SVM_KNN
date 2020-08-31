@@ -8,3 +8,5 @@ RAVDESS_FOLDER = 'datasets\\ravdess\\'
 SAVEE_FOLDER = 'datasets\\savee\\ALL\\'
 TESS_FOLDER = 'datasets\\tess\\'
 ASSEMBLY_SIX_FOLDER = 'datasets\\all_english\\six_discrete\\'
+
+MODELS_FOLDER = 'models\\'

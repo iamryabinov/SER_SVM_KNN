@@ -137,7 +137,7 @@ class KNNBaseMethod(KNearestNeighbors):
             if dataset.name.lower() in file and self.method_name.lower() in file and 'summary' in file:
                 filename = file
                 print(filename)
-        # print(filename)
+        # print(path_to_file)
         df = pd.read_csv(self.results_folder + filename, delimiter=';')
         for preprocessing in ['raw', 'normalized', 'standardized']:
             best_of_suffix = df.iloc[df['test_score_{}'.format(preprocessing)].argmax()]
@@ -174,9 +174,9 @@ def knn_confusion_matrix(dataset, n):
     )
     disp.ax_.set_title('{} k-NN confusion matrix'.format(dataset.name))
     plt.show()
-    # filename = directory + '{}_knn_confusion_matrix.png'.format(dataset.name)
-    # plt.savefig(fname=filename)
-    # print('Saved {}'.format(filename))
+    # path_to_file = directory + '{}_knn_confusion_matrix.png'.format(dataset.name)
+    # plt.savefig(fname=path_to_file)
+    # print('Saved {}'.format(path_to_file))
     # plt.close()
 
 def summarize_all(datasets_list, methods_list):
