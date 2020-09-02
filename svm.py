@@ -196,7 +196,7 @@ classifiers_parameters = {svm_linear: svm_linear_parameters,
                           knn: knn_parameters}
 
 if __name__ == '__main__':
-    split_report_file()
+    pass
 
 
 
