@@ -71,18 +71,6 @@ datasets_list_original = [ravdess_original, cremad_original, savee_original, tes
                           iemo_original, emodb_original,
                           all_english_six_original]
 
-iemo_pos_neg_neu = Dataset('Iemocap-PosNegNeu', IEMOCAP_FOLDER, 'English', label='pos_neg_neu')
-ravdess_pos_neg_neu = Dataset('RAVDESS-PosNegNeu', RAVDESS_FOLDER, 'English', label='pos_neg_neu')
-cremad_pos_neg_neu = Dataset('Crema-D-PosNegNeu', CREMAD_FOLDER, 'English', label='pos_neg_neu')
-savee_pos_neg_neu = Dataset('SAVEE-PosNegNeu', SAVEE_FOLDER, 'English', label='pos_neg_neu')
-tess_pos_neg_neu = Dataset('TESS-PosNegNeu', TESS_FOLDER, 'English', label='pos_neg_neu')
-emodb_pos_neg_neu = Dataset('Emo-DB-PosNegNeu', EMODB_FOLDER, 'German', label='pos_neg_neu')
-all_english_six_pos_neg_neu = Dataset('English-Assembly-Six-PosNegNeu', ASSEMBLY_SIX_FOLDER, 'English',
-                                      label='pos_neg_neu')
-datasets_list_pos_neg_neu = [iemo_pos_neg_neu, ravdess_pos_neg_neu,
-                             cremad_pos_neg_neu, savee_pos_neg_neu,
-                             tess_pos_neg_neu, emodb_pos_neg_neu,
-                             all_english_six_pos_neg_neu]
 
 iemo_negative_binary = Dataset('Iemocap-NegativeBinary', IEMOCAP_FOLDER, 'English', label='negative_binary')
 ravdess_negative_binary = Dataset('RAVDESS-NegativeBinary', RAVDESS_FOLDER, 'English', label='negative_binary')
